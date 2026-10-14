@@ -149,12 +149,14 @@ case'sankey':{
  t[0].link.color=t[0].link.source.map(i=>['rgba(22,121,182,.24)','rgba(0,166,158,.24)','rgba(141,105,215,.24)','rgba(231,163,72,.24)'][i]);
  L.margin={l:30,r:40,t:40,b:40};break}
 case'sunburst':case'treemap':{
- t[0].textinfo='label+value+percent root';
- t[0].insidetextfont={size:18,color:'#fff'};
- t[0].textfont={size:17};
+ t[0].textinfo='none';
+ t[0].texttemplate='<b>%{label}</b><br>%{value} trabajadores<br>%{percentRoot:.1%} del total';
+ t[0].marker={colors:['#d9eef5','#a5dbf0','#b0e7dd','#6dbbe1','#91cdea','#68d0be','#8adccc'],line:{color:'#fff',width:3}};
+ t[0].insidetextfont={size:16,color:'#173b50'};
+ t[0].textfont={size:16,color:'#173b50'};
  t[0].hovertemplate='<b>%{label}</b><br>%{value} trabajadores<br>%{percentRoot:.1%} del total<br>%{percentParent:.1%} de su grupo<extra></extra>';
  L.uniformtext={minsize:14,mode:'hide'};
- if(type==='sunburst'){t[0].sort=false;t[0].branchvalues='total';t[0].level='Empresa Horizonte';}
+ if(type==='sunburst'){t[0].sort=false;t[0].branchvalues='total';t[0].level='Empresa Horizonte';t[0].insidetextorientation='horizontal';}
  break}
 case'network':{
  let labels=[...countries,...depts];
@@ -191,7 +193,7 @@ case'event':{
  addAnnotation(L,{xref:'x',yref:'paper',x:0,y:1.03,text:'Inicio del programa (julio)',bgcolor:'#fff5e7',borderpad:7,font:{size:14,color:'#9c5c18'}});break}
 case'survival':{
  const z=[D.km(true),D.km(false)];
- t.forEach((tr,i)=>{tr.mode='lines';tr.line.width=4;t.push;});
+ t.forEach(tr=>{tr.mode='lines';tr.line.width=4;});
  t.push({type:'scatter',mode:'markers+text',x:[24,24],y:z.map(v=>v.survival),text:z.map(v=>p(v.survival,0)),textposition:['top left','bottom left'],textfont:{size:18,color:'#12374e'},marker:{size:11,color:[C.palette[0],C.palette[1]]},showlegend:false,hovertemplate:'Permanencia: %{text}<extra></extra>'});
  L.xaxis.range=[0,27];L.yaxis.range=[0,1.02];L.margin.r=90;break}
 }
