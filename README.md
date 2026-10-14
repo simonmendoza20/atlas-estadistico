@@ -1,28 +1,19 @@
 # Atlas Estadístico
 
-Atlas público de visualizaciones estadísticas en español.
+Sitio público: https://simonmendoza20.github.io/atlas-estadistico/
 
-## Versión 2
+## Estado actual
 
-- **294 entradas** de tipos, variantes y técnicas de visualización en **12 familias**.
-- Gráfico interactivo protagonista en la parte superior; catálogo con búsqueda y filtros debajo.
-- 36 plantillas base de Plotly utilizadas para ilustrar las entradas. **Importante:** las 294 entradas NO equivalen a 294 implementaciones geométricas distintas. Muchas variantes avanzadas usan una demostración de su familia, no el algoritmo estadístico correspondiente. Se distinguen así para evitar presentar ejemplos simulados como análisis reales.
-- Exportación PNG y laboratorio CSV sencillo que procesa datos en el navegador.
+- 35 tipos de visualización implementados mediante Plotly.js.
+- Visualización protagonista en la parte superior, sin cabecera ornamental.
+- Navegación **Anterior / Aleatorio / Siguiente** al lado del título de la técnica.
+- Catálogo inferior con búsqueda y filtros.
+- Exportación PNG y laboratorio CSV básico que procesa los datos localmente.
 
-## Sitio
+## Transparencia metodológica
 
-https://simonmendoza20.github.io/atlas-estadistico/
-
-## Fuentes de inspiración y taxonomía
-
-- https://r-graph-gallery.com/
-- https://www.data-to-viz.com/
-- https://observablehq.github.io/plot/features/marks
+La versión anterior mostraba 294 entradas, pero muchas variantes utilizaban exactamente el mismo gráfico. Se retiraron esas etiquetas para no confundir catálogo de nombres con implementaciones reales. Los ejemplos usan datos simulados y algunos gráficos complejos son esquemáticos, no ajustes estadísticos reproducibles. La prioridad es implementar geometrías y algoritmos propios antes de volver a ampliar el número.
 
 ## Tecnología
 
-HTML/CSS/JS y Plotly.js. Alojado en GitHub Pages, sin servidor.
-
-## Próxima etapa
-
-Implementar visualizaciones propias y cálculos reproducibles para cada entrada, ejemplos reales y código R/Python. La taxonomía es abierta: no existe una lista universal y exhaustiva de técnicas gráficas.
+HTML, CSS, JavaScript, Plotly.js, GitHub Pages.
