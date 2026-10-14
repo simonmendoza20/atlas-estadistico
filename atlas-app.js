@@ -1,7 +1,7 @@
 /* Interfaz del Atlas — 35 técnicas y una sola base de datos. */
 (function(){
 'use strict';
-const D=window.AtlasData,C=window.AtlasCharts,A=window.AtlasAnalysis;
+const D=window.AtlasData,C=window.AtlasCharts,A=window.AtlasAnalysis,V=window.AtlasVisuals;
 const raw=[
 ['Barras','Descriptiva','bar'],['Barras horizontales','Descriptiva','hbar'],['Barras apiladas','Descriptiva','stack'],
 ['Histograma','Distribuciones','histogram'],['Densidad kernel','Distribuciones','density'],['Boxplot','Distribuciones','box'],['Violín','Distribuciones','violin'],['Distribución acumulada ECDF','Distribuciones','ecdf'],['Q–Q plot','Distribuciones','qq'],['Ridgeline','Distribuciones','ridge'],
@@ -26,6 +26,7 @@ function show(i,scroll=false){
  '<label class="jump-label" for="jumpTo">N.º</label><input id="jumpTo" type="number" min="1" max="'+raw.length+'" value="'+(selected+1)+'">'+
  '<span class="jump-total">/ '+raw.length+'</span><button id="jumpButton">Ir</button></div></div>'+
  '<p class="muted" style="margin:5px 0 2px">Empresa Horizonte · '+D.N+' trabajadores ficticios · datos simulados y compartidos por todo el Atlas</p>'+
+ '<div class="chart-quick"><div class="chart-quick-copy"><span>LECTURA RÁPIDA · QUÉ SIGNIFICAN LOS DATOS</span><strong>'+V.summary(t)+'</strong></div><div class="chart-quick-stats">'+desc.metrics.slice(0,2).map(v=>'<div class="quick-number"><b>'+v[1]+'</b><small>'+v[0]+'</small></div>').join('')+'</div></div>'+
  '<div class="chart" id="chart"></div>'+
  '<div class="feature-description"><div class="insights-grid"><div class="insights-method">'+
  '<h3>¿Para qué sirve?</h3><p>'+desc.purpose+'</p>'+
@@ -33,7 +34,7 @@ function show(i,scroll=false){
  '<div class="dataactions"><button id="png">Exportar gráfico PNG</button><button id="downloadData">Descargar base simulada CSV</button></div>'+
  '</div><aside class="insights-example"><span class="insights-eyebrow">EMPRESA HORIZONTE · EJEMPLO ESTADÍSTICO</span>'+
  '<h3>Resultados e interpretación</h3>'+A.html(t)+'</aside></div></div>';
- try{let result=C.plot(t);Plotly.newPlot('chart',result.traces,result.layout,{responsive:true,displaylogo:false,scrollZoom:false}).catch(error=>{document.querySelector('#chart').textContent='No fue posible mostrar este gráfico: '+error.message})}
+ try{let result=V.enhance(t,C.plot(t));Plotly.newPlot('chart',result.traces,result.layout,{responsive:true,displaylogo:false,scrollZoom:false}).catch(error=>{document.querySelector('#chart').textContent='No fue posible mostrar este gráfico: '+error.message})}
  catch(error){document.querySelector('#chart').textContent='Error de representación: '+error.message}
  document.querySelector('#prev').onclick=()=>show(selected-1);
  document.querySelector('#nextTop').onclick=()=>show(selected+1);
