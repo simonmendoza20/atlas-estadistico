@@ -1,7 +1,7 @@
 /* Cada tipo gráfico se obtiene de las mismas 240 observaciones de Empresa Horizonte. */
 (function(){
 'use strict';
-const D=window.AtlasData,P=D.people;
+const D=window.AtlasData,P=D.people,N=D.N;
 const {mean,sd,stats,group,vals,ols,corr,fnum,percent}=D;
 const countries=D.countries,depts=D.depts;
 const palette=['#1679b6','#00a69e','#8d69d7','#e7a348'];
