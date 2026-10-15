@@ -157,6 +157,18 @@ case'sunburst':case'treemap':{
  t[0].hovertemplate='<b>%{label}</b><br>%{value} trabajadores<br>%{percentRoot:.1%} del total<br>%{percentParent:.1%} de su grupo<extra></extra>';
  L.uniformtext={minsize:14,mode:'hide'};
  if(type==='sunburst'){t[0].sort=false;t[0].branchvalues='total';t[0].level='Empresa Horizonte';t[0].insidetextorientation='horizontal';}
+ if(type==='treemap'){
+  let op=P.filter(q=>q.division==='Operaciones'),admin=P.filter(q=>q.division==='Administración');
+  let avgs=[D.mean(P.map(q=>q.satisfaction)),D.mean(op.map(q=>q.satisfaction)),D.mean(admin.map(q=>q.satisfaction)),...depts.map(d=>D.mean(P.filter(q=>q.dept===d).map(q=>q.satisfaction)))];
+  t[0].customdata=avgs;
+  t[0].texttemplate='<b>%{label}</b><br>%{value} personas · %{percentRoot:.1%}<br>Satisfacción: %{customdata:.1f}/100';
+  t[0].hovertemplate='<b>%{label}</b><br>%{value} personas<br>%{percentRoot:.1%} del total<br>%{percentParent:.1%} del grupo<br>Satisfacción media %{customdata:.1f} puntos<extra></extra>';
+  t[0].marker={colors:['#1b3c56','#1b5d84','#117468','#237ca7','#469fc0','#0e8c7f','#47b8a2'],line:{color:'#ffffff',width:5}};
+  t[0].textfont={size:18,color:'#ffffff'};
+  t[0].insidetextfont={size:18,color:'#ffffff'};
+  t[0].tiling={packing:'squarify',pad:8};
+  L.uniformtext={minsize:15,mode:'hide'};
+ }
  break}
 case'network':{
  let labels=[...countries,...depts];
