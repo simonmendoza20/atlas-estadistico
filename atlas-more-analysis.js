@@ -57,7 +57,7 @@ return a;
 }
 function html(t){const a=get(t);return '<div class="metric-row">'+a.metrics.map(q=>'<div><strong>'+q[1]+'</strong><small>'+q[0]+'</small></div>').join('')+'</div>'+a.paragraphs.map((s,i)=>'<p><b>'+(i?'Interpretación. ':'Resultado del ejemplo. ')+'</b>'+s+'</p>').join('')}
 function summary(type){
- const a=get(type);return a.paragraphs[0].replace(/^.{0,0}$/,'');
+ const a=get(type);return a.metrics[0][0]+': '+a.metrics[0][1]+' · '+a.metrics[1][0]+': '+a.metrics[1][1]+'. '+a.purpose;
 }
 window.AtlasMoreAnalysis={get,html,info:texts,summary};
 })();
