@@ -4,7 +4,7 @@
 const D=window.AtlasData,C=window.AtlasCharts,P=D.people,N=D.N,F=D.fnum,Q=D.percent;
 const dept=D.depts,places=D.countries,months=C.months;
 const colors=['#1976a5','#0cb2a5','#956bd4','#edaa58'],ink='#19364c';
-const select=(k,v)=>P.filter(z=>z[k]===v),num=(k,v)=>select(k,v).length,vals=(rows,k)=>rows.map(z=>z[k]);
+const select=(k,v)=>P.filter(z=>z[k]===v),num=(k,v)=>select(k,v).length,vals=(rows,k)=>rows.map(z=>z[k]),mean=D.mean;
 const avg=(rows,k)=>D.mean(vals(rows,k)),fmt=(z,d=1)=>F(z,d),pct=(z,d=1)=>Q(z,d);
 const line=(x,y,name,more={})=>({type:'scatter',mode:'lines+markers',x,y,name,...more});
 const ageLabels=['20–29','30–39','40–49','50–59','60+'];
@@ -21,9 +21,9 @@ case'pareto':{
  l.yaxis.title='Trabajadores';l.yaxis.range=[0,95];l.yaxis2={title:'Porcentaje acumulado',tickformat:'.0%',overlaying:'y',side:'right',range:[0,1.15]};l.margin.r=90;break}
 case'lollipop':{
  const v=dept.map(d=>({d,m:avg(select('dept',d),'satisfaction')}));
- t=v.map((z,i)=>({type:'scatter',mode:'lines',x:[0,z.m],y:[z.d,z.d],line:{width:3,color:'#b7d5e2'},showlegend:false,hoverinfo:'skip'}));
+ t=v.map((z,i)=>({type:'scatter',mode:'lines',x:[55,z.m],y:[z.d,z.d],line:{width:3,color:'#b7d5e2'},showlegend:false,hoverinfo:'skip'}));
  t.push({type:'scatter',mode:'markers+text',x:v.map(z=>z.m),y:v.map(z=>z.d),text:v.map(z=>fmt(z.m)+' puntos'),textposition:'middle right',textfont:{size:17,color:ink},marker:{size:19,color:colors},showlegend:false,hovertemplate:'%{y}: %{x:.1f} puntos<extra></extra>'});
- l.xaxis={title:'Satisfacción media (0–100)',range:[0,90],gridcolor:'#edf3f6'};l.yaxis={title:'Departamento',autorange:'reversed',showgrid:false};break}
+ l.xaxis={title:'Satisfacción media (0–100) · eje ampliado 55–75',range:[55,75],gridcolor:'#edf3f6'};l.yaxis={title:'Departamento',autorange:'reversed',showgrid:false};break}
 case'dumbbell':{
  let genders=['Mujer','Hombre'];const z=dept.map(d=>({d,v:genders.map(g=>avg(P.filter(p=>p.dept===d&&p.gender===g),'salary'))}));
  t=z.map(a=>({type:'scatter',mode:'lines',x:a.v,y:[a.d,a.d],line:{color:'#a8c8d6',width:5},showlegend:false,hoverinfo:'skip'}));
@@ -61,7 +61,7 @@ case'raincloud':{
  const kinds=['Operaciones','Administración'];
  const data=kinds.map(k=>P.filter(p=>p.division===k).map(p=>p.salary));
  kinds.forEach((k,i)=>{
- t.push({type:'violin',orientation:'h',y:data[i],x:data[i].map(()=>i+1),side:'positive',points:false,meanline:{visible:true},box:{visible:true},line:{color:colors[i]},fillcolor:colors[i],opacity:.5,name:k,hoveron:'violins+points'});
+ t.push({type:'violin',orientation:'v',y:data[i],x:data[i].map(()=>i+1),side:'positive',points:false,meanline:{visible:true},box:{visible:true},line:{color:colors[i]},fillcolor:colors[i],opacity:.5,name:k,hoveron:'violins+points'});
  t.push({type:'scatter',mode:'markers',x:data[i].map((_,j)=>i+1-.14-((j*13%23)/115)),y:data[i],marker:{size:5,color:colors[i],opacity:.35},name:k+' · observaciones',showlegend:false,hovertemplate:'USD %{y:.0f}<extra>'+k+'</extra>'})
  });
  l.xaxis={title:'Divisiones de la empresa (distribución vertical)',tickvals:[1,2],ticktext:kinds,range:[.35,2.65]};l.yaxis.title='Salario mensual (USD)';l.violinmode='overlay';break}
@@ -84,7 +84,7 @@ case'heatcalendar':{
  l.yaxis.autorange='reversed';l.xaxis.title='Mes de 2026';l.margin.l=130;break}
 case'diverge':{
  const categories=['Muy baja','Baja','Intermedia','Alta','Muy alta'];
- const bands=dept.map(d=>{let v=select('dept',d).map(p=>p.satisfaction);return [v.filter(x=>x<45).length,v.filter(x=>x>=45&&x<60).length,v.filter(x=>x>=60&&x<70).length,v.filter(x=>x>=70&&x<85).length,v.filter(x=>x>=85).length]});
+ const bands=dept.map(d=>{let v=select('dept',d).map(p=>p.satisfaction);return [v.filter(x=>x<55).length,v.filter(x=>x>=55&&x<62).length,v.filter(x=>x>=62&&x<70).length,v.filter(x=>x>=70&&x<76).length,v.filter(x=>x>=76).length]});
  const values=bands.map((a,i)=>a.map(v=>v/num('dept',dept[i])*100));
  t=categories.map((name,k)=>({type:'bar',orientation:'h',name,y:dept,x:values.map(a=>a[k]*(k<2?-1:1)),text:values.map(a=>pct(a[k]/100,0)),textposition:'inside',textfont:{size:13,color:k===2?ink:'#fff'},marker:{color:['#c45c64','#ea9f7d','#e5e9ed','#70bcae','#168e88'][k]},customdata:bands.map(a=>a[k]),hovertemplate:'%{y}<br>'+name+': %{customdata} personas<extra></extra>'}));
  l.barmode='relative';l.xaxis={title:'Proporción de trabajadores por nivel (izq. bajo · der. alto)',tickvals:[-100,-75,-50,-25,0,25,50,75,100],ticktext:['100%','75%','50%','25%','0','25%','50%','75%','100%'],range:[-100,100],zeroline:true,zerolinewidth:2,zerolinecolor:'#324d61'};l.yaxis.autorange='reversed';break}
