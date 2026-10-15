@@ -74,7 +74,9 @@ scatter3d:['¿Cómo se relacionan tres indicadores para cada trabajador?','Sitú
 residuals:['¿Qué empleados obtuvieron un desempeño distinto al que predice el modelo?','Representa la diferencia entre el valor observado y el predicho por la regresión.','Los residuos positivos corresponden a mejor desempeño de lo predicho; los negativos, a peor.'],
 calibration:['¿Coincide el riesgo de salida estimado con las salidas observadas?','Contrasta predicciones medias y frecuencias reales en cinco grupos de igual tamaño.','Cada punto resume 48 trabajadores: riesgo predicho frente a porcentaje que realmente salió.'],
 rose:['¿En qué departamentos hay más trabajo remoto o híbrido?','Compara porcentajes departamentales mediante barras radiales.','La longitud de cada barra indica una proporción de empleados remotos/híbridos.'],
-dotmap:['¿Dónde están las sedes y cuántas personas trabajan en cada una?','Representa las cuatro ubicaciones mediante círculos de tamaño proporcional.', 'Chile tiene '+ch+' empleados y es la sede mayor; las burbujas codifican cantidades.']
+dotmap:['¿Dónde están las sedes y cuántas personas trabajan en cada una?','Representa las cuatro ubicaciones mediante círculos de tamaño proporcional.', 'Chile tiene '+ch+' empleados y es la sede mayor; las burbujas codifican cantidades.'],
+smallmultiples:['¿Qué departamentos mejoraron más su satisfacción a lo largo del año?','Separa la evolución mensual en cuatro paneles que usan idéntica escala para compararlos.','Cada panel muestra un departamento durante doce meses: los valores iniciales y finales permiten comparar sus cambios.'],
+bootstrap:['¿Cuán estable es la mediana salarial si repetimos el muestreo?','Muestra la distribución de 1.500 medianas calculadas mediante remuestreo con reemplazo.','La mediana original es USD '+f(med('salary'),0)+'; la curva muestra cómo varía en 1.500 remuestras bootstrap.']
 };
 const confusions=['mosaic','forest','band','event','pca','radar','roc'];
 function edit(t, original){const e=text[t];if(!e)return original;return {...original,question:e[0],purpose:e[1],variables:original.variables};}
