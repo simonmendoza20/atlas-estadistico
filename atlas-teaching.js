@@ -32,7 +32,7 @@ error:'La altura de la barra es el salario medio departamental. La línea sobre 
 mosaic:'El ancho de cada bloque depende del total de trabajadores de su sede. Dentro de ese bloque, la altura de cada color refleja el porcentaje por género.',
 sankey:'Sigue una corriente desde la sede hacia el departamento: su grosor es el número de trabajadores que pertenece a esa combinación. Los flujos suman 240.',
 sunburst:'Empieza en el centro: Empresa Horizonte. El segundo anillo separa Operaciones y Administración; el exterior muestra departamentos. Logística tiene '+logistics+' personas: '+pct(logistics/240)+' del total y '+pct(logistics/operations)+' de Operaciones.',
-treemap:'El rectángulo de Producción ocupa 75 de los 240 trabajadores: '+pct(75/240)+' del total. El color añade la satisfacción media del departamento, mientras el área corresponde a cantidad.',
+treemap:'El rectángulo de Producción contiene 75 trabajadores: '+pct(75/240)+' del total. El área representa su cantidad y cada rectángulo muestra, además, la satisfacción media del departamento; los colores separan las categorías.',
 network:'Los círculos son categorías de sede y departamento, no personas. Cada línea expresa un vínculo sede–departamento y su grosor corresponde a la cantidad asociada.',
 geo:'Un país más oscuro reúne más empleados de la organización, no necesariamente más empleo a nivel nacional. Las etiquetas muestran el recuento exacto.',
 cluster:'Los colores indican tres grupos hallados por k-means según horas de capacitación y desempeño. Las cruces marcan los centroides, los promedios de cada grupo.',
@@ -59,7 +59,9 @@ scatter3d:'Gira el gráfico con el mouse. La ubicación de cada trabajador se de
 residuals:'Los puntos por encima de cero tuvieron un desempeño mayor al predicho; los que están debajo, menor. Busca si aparece alguna curva o abanico de dispersión.',
 calibration:'Cada punto resume 48 personas. Si el riesgo predicho medio coincide con el porcentaje de salidas, el punto cae cerca de la diagonal de calibración ideal.',
 rose:'Cada pétalo representa un departamento y su longitud radial una proporción de trabajo remoto/híbrido. Los ángulos sirven para separar categorías, no medir porcentajes.',
-dotmap:'Cuanto mayor es el círculo, más empleados hay en esa sede. Contrasta las cantidades por tamaño y por las etiquetas, sin interpretar el mapa como tasas nacionales.'
+dotmap:'Cuanto mayor es el círculo, más empleados hay en esa sede. Contrasta las cantidades por tamaño y por las etiquetas, sin interpretar el mapa como tasas nacionales.',
+smallmultiples:'Cada recuadro es un departamento, pero los cuatro usan la misma escala vertical. Compara los valores de enero y diciembre de cada uno, en vez de interpretar cuatro líneas que se cruzan.',
+bootstrap:'La línea verde es la mediana salarial de los 240 empleados. El histograma representa 1.500 medianas obtenidas por remuestreo con reemplazo; las líneas naranjas delimitan su intervalo percentil del 95 %.'
 };
 window.AtlasTeaching={guide,has:t=>!!guide[t],read:t=>guide[t]||'Lee primero las unidades y luego los valores representados.'};
 })();
