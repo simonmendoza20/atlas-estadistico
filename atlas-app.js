@@ -16,7 +16,7 @@ const raw=[
 const basic=['bar','hbar','stack','histogram','box','scatter','line','area','treemap','lollipop','pareto','donut','waffle','waterfall','pyramid'];
 const advanced=['pca','parcoords','network','cluster','roc','forest','event','survival','raincloud','radar','scatter3d','residuals','calibration','bootstrap'];
 const level=t=>basic.includes(t)?'Básico':advanced.includes(t)?'Avanzado':'Intermedio';
-let selected=27;
+let selected=40;
 function show(i,scroll=false){
  selected=(i+raw.length)%raw.length;
  let [name,f,t]=raw[selected],isExtra=!!EA.info[t],isNew=M2.extra.some(v=>v[2]===t),base=isNew?M2.get(t):isExtra?EA.get(t):A.get(t),desc=Ed.edit(t,base);
